@@ -53,6 +53,11 @@
 
 <h1>My stuff</h1>
 
+<label style="display: block; margin-bottom: 10px;">
+    <input type="checkbox" id="tooltipToggle" checked>
+    tooltips for clueless noobs
+</label>
+
 <p>
     Im christoshere. I code random things
 </p>
@@ -242,11 +247,11 @@ data-tooltip="incredible customization app for windows. CAREFUL!! this app can b
 Windhawk </a>
 
 <a href="https://systeminformer.com"
-data-tooltip="very useful for seeing what your pc is doing. basically taskmgr on steroids. incredible capabilities for people who know what theyre doing. 99% of people do not need this.">
+data-tooltip="fork of proccess hacker. incredible capabilites but can put the system at risk if you dont know what youre doing">
 System Informer </a>
 
 <a href="https://sourceforge.net/projects/processhacker/"
-data-tooltip="process hacker is system informer on steroids. this app has capabilities unmatched to any other application. there are certain things you can do with this that geniounly put the operating system at risk. it is usually flaged by antivirusus as a hacktool because of this. DO NOT DOWNLOAD UNLESS YOU ARE VERY DEEP INTO WINDOWS AND KNOW WHAT YOU ARE DOING.">
+data-tooltip="basically taskmgr with x50 times the capabilities. usually flagged by antiviruses. (no idea why system informer isnt)">
 Process Hacker </a>
 
 <a href="https://github.com/RamonUnch/AltSnap/releases"
@@ -258,7 +263,7 @@ data-tooltip="basically the best desktop widget for windows. most people dont ne
 Desktop Info </a>
 
 <a href="https://whatpulse.org/downloads"
-data-tooltip="useful if you want to know how much you use your keyboard and mouse. ">
+data-tooltip="useful if you want to know how much you use your keyboard and mouse.">
 WhatPulse </a>
 
 <a href="https://www.nirsoft.net/utils/iconsext.html"
@@ -346,14 +351,17 @@ Borderize </a>
 <script>
     const tooltip = document.getElementById("tooltip");
     const links = document.querySelectorAll("a[data-tooltip]");
+    const tooltipToggle = document.getElementById("tooltipToggle");
 
     links.forEach(link => {
         link.addEventListener("mouseenter", () => {
+            if (!tooltipToggle.checked) return;
             tooltip.textContent = link.dataset.tooltip;
             tooltip.style.display = "block";
         });
 
         link.addEventListener("mousemove", (event) => {
+            if (!tooltipToggle.checked) return;
             const offset = 15;
 
             let x = event.clientX + offset;
@@ -376,6 +384,12 @@ Borderize </a>
         link.addEventListener("mouseleave", () => {
             tooltip.style.display = "none";
         });
+    });
+
+    tooltipToggle.addEventListener("change", () => {
+        if (!tooltipToggle.checked) {
+            tooltip.style.display = "none";
+        }
     });
 </script>
 
